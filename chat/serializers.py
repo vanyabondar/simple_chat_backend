@@ -52,6 +52,7 @@ class MessageIdListSerializer(serializers.Serializer):
         return attrs
 
 
+# Serializers for response
 class UserIdSerializer(serializers.Serializer):
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
