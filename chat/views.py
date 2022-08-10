@@ -79,9 +79,9 @@ class ThreadListAPIView(ListAPIView):
         """
         Validates that param 'user_id' exists in GET params and user with this id exists.
         """
-        if self.key_name not in self.request.GET:
+        if self.key_name not in self.request.query_params:
             raise ValidationError({'error': f'param \'{self.key_name}\' must exist'})
-        if not User.objects.filter(pk=self.request.GET[self.key_name]).exists():
+        if not User.objects.filter(pk=self.request.query_params[self.key_name]).exists():
             raise ValidationError({'error': 'user not found'})
 
     def get_queryset(self):
@@ -111,9 +111,9 @@ class MessageListCreateAPIView(ListCreateAPIView):
         """
         Validates that param 'thread_id' exists in GET params and thread with this id exists.
         """
-        if self.key_name not in self.request.GET:
+        if self.key_name not in self.request.query_params:
             raise ValidationError({'error': f'param \'{self.key_name}\' must exist'})
-        if not Thread.objects.filter(pk=self.request.GET[self.key_name]).exists():
+        if not Thread.objects.filter(pk=self.request.query_params[self.key_name]).exists():
             raise ValidationError({'error': 'thread not found'})
 
     def get_queryset(self):
